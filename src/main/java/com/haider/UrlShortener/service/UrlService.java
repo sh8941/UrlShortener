@@ -12,6 +12,9 @@ import com.haider.UrlShortener.exception.ResourceNotFound;
 import com.haider.UrlShortener.mapper.UrlMapper;
 import com.haider.UrlShortener.repo.UrlRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.AccessDeniedException;
@@ -23,8 +26,6 @@ import java.util.List;
 public class UrlService {
     @Autowired
     private UrlRepo urlRepo;
-    @Autowired
-    private UserService userService;
     @Autowired
     private UrlMapper urlMapper;
     @Autowired
@@ -53,14 +54,17 @@ public class UrlService {
         return urlMapper.toDto(finalSaved);
     }
 
-    public UrlResponse getLongUrl(String shortUrl) {
+    @Cacheable(value = "url", key = "#shortUrl")
+    public String getLongUrl(String shortUrl) {
         // decode shortUrl then go to index, then fetch and return
+        System.out.println("    fetching from database...");
         Long urlId = Base62Util.decode(shortUrl);
         UrlEntity urlEntity = urlRepo.findByUrlIdAndActiveTrue(urlId).orElseThrow(() ->
                 new ResourceNotFound("Url not found with id " + shortUrl));
-        return urlMapper.toDto(urlEntity);
+        return urlEntity.getLongUrl();
     }
 
+    @CacheEvict(value = "url", key = "#shortUrl")
     public void deleteUrl(String shortUrl) {
         // decode shortUrl and fetch entity
         Long urlId = Base62Util.decode(shortUrl);

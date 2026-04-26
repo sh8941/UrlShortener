@@ -1,6 +1,8 @@
 package com.haider.UrlShortener.dtos.response;
 
-public class UrlResponse {
+import java.io.Serializable;
+
+public class UrlResponse implements Serializable {
     Long urlId;
     String longUrl;
     String shortUrl;

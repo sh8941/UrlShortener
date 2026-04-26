@@ -1,5 +1,6 @@
 package com.haider.UrlShortener.controller;
 
+import com.haider.UrlShortener.Base62.Base62Util;
 import com.haider.UrlShortener.dtos.response.UrlResponse;
 import com.haider.UrlShortener.service.UrlService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,9 @@ class GoToController {
 
     @GetMapping("/{shortUrl}")
     public ResponseEntity<Void> getUrl(@PathVariable String shortUrl) {
-        UrlResponse urlResponse = urlService.getLongUrl(shortUrl);
+        java.lang.String longUrl = urlService.getLongUrl(shortUrl);
         return ResponseEntity.status(HttpStatus.FOUND)
-                .location(URI.create(urlResponse.getLongUrl()))
+                .location(URI.create(longUrl))
                 .build();
     }
 }
