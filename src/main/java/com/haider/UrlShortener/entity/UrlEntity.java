@@ -14,6 +14,16 @@ public class UrlEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private UserEntity createdBy;
+    private Long clickCount;
+
+    public UrlEntity() {
+        this.urlId = 0L;
+        this.longUrl = null;
+        this.shortUrl = null;
+        this.active = true;
+        this.createdBy = null;
+        this.clickCount = 0L;
+    }
 
     public Long getUrlId() {
         return urlId;
@@ -53,6 +63,14 @@ public class UrlEntity {
 
     public void setCreatedBy(UserEntity createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public Long getClickCount() {
+        return clickCount;
+    }
+
+    public void setClickCount(Long clickCount) {
+        this.clickCount = clickCount;
     }
 
     @Override
