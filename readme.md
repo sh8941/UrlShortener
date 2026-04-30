@@ -56,45 +56,70 @@ This project demonstrates backend engineering best practices including caching, 
 
 ---
 
-## 🏗️ Project Structure
+## 📦 Project Structure
 
 ```
-src/
-├── entity/                
-│   ├── UrlEntity
-│   ├── UserEntity
-│   └── RoleEntity
+com.haider.UrlShortener
 │
-├── repo/                  
-│   ├── UrlRepo
-│   ├── UserRepo
-│   └── RoleRepo
+├── Base62
+│   └── Base62Util.java              # Utility for Base62 encoding/decoding (short URL generation)
 │
-├── service/               
-│   ├── UrlService
-│   ├── UserService
-│   ├── JwtService
-│   └── CustomerUserDetailsService
+├── Config
+│   ├── RateLimitingConfig.java      # Configuration for rate limiting
+│   ├── RedisConfig.java             # Redis cache configuration
+│   ├── SecurityConfig.java          # Spring Security configuration
+│   ├── SecurityUtils.java           # Helper utilities for security context
+│   ├── SwaggerConfig.java           # API documentation configuration
+│   └── UrlAuthorization.java        # URL access control rules
 │
-├── filter/                
-│   ├── JwtAuthFilter      
-│   └── RateLimitFilter    
+├── controller
+│   ├── AdminController.java         # Admin-related APIs
+│   ├── AuthController.java          # Authentication (login/register)
+│   ├── GoToController.java          # Handles redirection to original URLs
+│   ├── HelloController.java         # Test/health check endpoints
+│   ├── UrlController.java           # URL shortening & management APIs
+│   └── UserController.java          # User management APIs
 │
-├── mapper/                
-│   ├── UrlMapper
-│   └── UserMapper
+├── dtos
+│   ├── request
+│   │   ├── AuthRequest.java         # Login/Register request payload
+│   │   ├── UrlRequest.java          # URL creation request
+│   │   └── UserRequest.java         # User-related request data
+│   │
+│   └── response
+│       ├── CustomPage.java          # Pagination response wrapper
+│       ├── UrlResponse.java         # URL response payload
+│       └── UserResponse.java        # User response payload
 │
-├── exception/             
-│   ├── GlobalExceptionHandler
-│   └── ResourceNotFound
+├── entity
+│   ├── RoleEntity.java              # Role model (ADMIN, USER, etc.)
+│   ├── UrlEntity.java               # URL database entity
+│   └── UserEntity.java              # User database entity
 │
-├── dto/                   
-│   └── UserResponse
+├── Exception
+│   ├── GlobalExceptionHandler.java  # Centralized exception handling
+│   └── ResourceNotFoundException.java # Custom exception
 │
-└── UrlShortenerApplication
+├── filter
+│   ├── JwtAuthFilter.java           # JWT authentication filter
+│   └── RateLimitFilter.java         # Request rate limiting filter
+│
+├── mapper
+│   ├── UrlMapper.java               # Entity ↔ DTO conversion (URL)
+│   └── UserMapper.java              # Entity ↔ DTO conversion (User)
+│
+├── repo
+│   ├── RoleRepo.java                # Role repository (JPA)
+│   ├── UrlRepo.java                 # URL repository
+│   └── UserRepo.java                # User repository
+│
+└── service
+    ├── CustomUserDetailsService.java # Spring Security user details service
+    ├── JwtService.java               # JWT token handling
+    ├── UrlService.java               # Business logic for URLs
+    └── UserService.java              # Business logic for users
 ```
 
----
 
 ## ⚙️ Tech Stack
 
