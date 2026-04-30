@@ -2,8 +2,6 @@ package com.haider.UrlShortener.service;
 
 import com.haider.UrlShortener.entity.UserEntity;
 import com.haider.UrlShortener.repo.UserRepo;
-import com.sun.security.auth.UserPrincipal;
-import jakarta.validation.constraints.Null;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -14,7 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepo userRepo;
 
