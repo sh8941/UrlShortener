@@ -1,9 +1,11 @@
 package com.haider.UrlShortener.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "roles")
+@Schema(hidden = true)
 public class RoleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

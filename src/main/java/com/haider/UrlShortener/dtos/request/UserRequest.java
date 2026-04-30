@@ -1,17 +1,36 @@
 package com.haider.UrlShortener.dtos.request;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.aspectj.bridge.IMessage;
 
+@Schema(description = "User request object for registering a new user")
 public class UserRequest {
-    @Size(min = 1, max = 255, message = "username size must be between 6 to 20")
+    @Schema(
+            description = "Username of the user",
+            example = "john_doe",
+            minLength = 6,
+            maxLength = 20
+    )
+    @NotBlank(message = "Username cannot be empty")
+    @Size(min = 6, max = 20, message = "Username size must be between 6 to 20")
     private String username;
+
+    @Schema(
+            description = "User email address",
+            example = "john@gmail.com"
+    )
     @Email(message = "enter correct email")
+    @NotBlank(message = "Email cannot be empty")
     private String email;
-    @Size(min = 6, max = 20, message = "password size should be between 6 to 20")
+
+
+    @NotBlank(message = "Password cannot be empty")
+    @Size(min = 6, max = 20, message = "Password size should be between 6 to 20")
     private String password;
 
     public String getUsername() {

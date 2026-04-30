@@ -1,11 +1,32 @@
 package com.haider.UrlShortener.dtos.response;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.util.List;
 
+@Schema(description = "Generic paginated response")
 public class CustomPage<T> {
+    @Schema(
+            description = "List of items in current page"
+    )
     private List<T> content;
+
+    @Schema(
+            description = "Current page number (0-based index)",
+            example = "0"
+    )
     private int page;
+
+    @Schema(
+            description = "Number of items per page",
+            example = "10"
+    )
     private int size;
+
+    @Schema(
+            description = "Indicates if there is a next page available",
+            example = "true"
+    )
     private boolean hasNext;
 
     public List<T> getContent() {

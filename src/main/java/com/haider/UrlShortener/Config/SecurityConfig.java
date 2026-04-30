@@ -42,7 +42,10 @@ public class SecurityConfig {
                                 .requestMatchers("/api/user/register",
                                         "/api/auth/login",
                                         "/api/hello",
-                                        "/goto/**").permitAll()
+                                        "/goto/**",
+                                        "/v3/api-docs/**",
+                                        "/swagger-ui/**",
+                                        "/swagger-ui.html").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManagement ->

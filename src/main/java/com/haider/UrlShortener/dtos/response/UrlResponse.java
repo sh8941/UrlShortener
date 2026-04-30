@@ -1,12 +1,34 @@
 package com.haider.UrlShortener.dtos.response;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.io.Serializable;
 
+@Schema(description = "Response object representing a shortened URL")
 public class UrlResponse implements Serializable {
-    Long urlId;
-    String longUrl;
-    String shortUrl;
-    Long createdBy;
+    @Schema(
+            description = "Unique identifier of the URL",
+            example = "101"
+    )
+    private Long urlId;
+
+    @Schema(
+            description = "Original long URL",
+            example = "https://www.google.com/search?q=url+shortener"
+    )
+    private String longUrl;
+
+    @Schema(
+            description = "Generated short URL",
+            example = "http://short.ly/abc123"
+    )
+    private String shortUrl;
+
+    @Schema(
+            description = "User ID who created the URL",
+            example = "1"
+    )
+    private Long createdBy;
 
     public Long getUrlId() {
         return urlId;
